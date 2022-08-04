@@ -7,6 +7,19 @@
 - Can run a database viewer on a server (e.g. `http://localhost:5555` to view your database, which can be shared with a liveshare pair!)
 - Joins are easier than Knex
 
+## Episode TLGC (Too Long Gimme Code);
+
+Working example: https://github.com/dev-academy-challenges/challenges/tree/rohan-prisma/packages/dreamfest
+
+To run:
+```sh
+# get to the branch rohan-prisma of the dev-academy-challenges/challenges repo
+# cd to dreamfest
+npm install
+npx prisma migrate dev
+npx prisma db seed
+npm run dev
+```
 ## What is this?
 
 I really enjoyed Gerard's posts from [`burying-the-lede`](https://github.com/enspiral-dev-academy/burying-the-lede), so I'm writing a spin-off series called `rocking-the-boat`. So far, it's a series where I pick a popular technology and hypothetically hot-swap it with a piece of tech that we currently use, make a shallow comparison, write some thoughts, and share it with y'all. Enjoy, episode 1 is on Prisma and Knex. 🥳
@@ -133,11 +146,15 @@ To do the same in Prisma, we
 2. (optional) push the change to our current development db with `npx prisma db push`
 3. save and migrate the change to schema with `npx prisma migrate dev` (this makes a new migration file in `prisma/migrations`) (this also runs seeds if the seed script is set-up)
 
+---
+
 ### [**Prisma Studio**](https://www.prisma.io/docs/concepts/components/prisma-studio)
 
 Prisma Studio solves a small quality-of-life problem that students have the first time the interact with them... opening them.
 
 With Prisma Studio, we can start a local server with `npx prisma studio` which opens a browser window where we can interact with our database (and perform CRUD). (This is great for students working over liveshare; this server can be shared and both students can view the contents of the database)
+
+---
 
 ### [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client)
 
@@ -276,8 +293,10 @@ function getEventsByDay(day, ctx = prismaCtx) {
 | **_thing_**     | **knex**                                                               | **prisma**                                   |
 |-----------------|------------------------------------------------------------------------|----------------------------------------------|
 | one record      | `.first()`                                                             | `.findUnique()`                              |
-| some columns    | `.select('column1', 'column2 as bananas')`                             | `select: {  column1: true,  column2: true }` |
-| joins/relations | `db('table1').join('table2', 'table1.primaryKey', 'table2.foreignKey'` | `include: {   table2: true }`                |
+| some columns    | `.select('column1', 'column2 as bananas')`                             | `select: { column1: true, column2: true }`   |
+| joins/relations | `db('table1').join('table2', 'table1.primaryKey', 'table2.foreignKey'` | `include: { table2: true }`                  |
+
+---
 
 ### [**Joins and Relations**](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
 
