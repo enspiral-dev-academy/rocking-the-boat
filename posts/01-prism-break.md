@@ -148,32 +148,16 @@ Notes:
 - knex examples all come from dreamfest-solution in challenges
 - assume input object has correct fields/types
 
+### Knex
 ```js
 // ... init knex stuff
 
-function getEventsByDay(day, db = connection) {
-  return db('events')
-    .join('locations', 'events.location_id', 'locations.id')
-    .where('day', day)
-    .select(
-      'events.id',
-      'events.day',
-      'events.time',
-      'events.name as eventName',
-      'events.description',
-      'locations.name as locationName'
-    )
-}
-
+// create
 function addNewEvent(event, db = connection) {
   return db('events').insert(event)
 }
 
-function deleteEvent(id, db = connection) {
-  return db('events').where('id', id).delete()
-}
-
-
+// read
 function getEventById(id, db = connection) {
   return db('events')
     .where('id', id)
@@ -188,25 +172,36 @@ function getEventById(id, db = connection) {
     )
 }
 
+// update
 function updateEvent(updatedEvent, db = connection) {
   return db('events').where('id', updatedEvent.id).update(updatedEvent)
 }
 
-
-// ... init prisma stuff
-const prismaCtx = prisma
+// delete
+function deleteEvent(id, db = connection) {
+  return db('events').where('id', id).delete()
+}
 
 // relations/joins
-function getEventsByDay(day, ctx = prismaCtx) {
-  return ctx.event.findMany({
-    where: {
-      day,
-    },
-    include: {
-      location: true,
-    },
-  })
+function getEventsByDay(day, db = connection) {
+  return db('events')
+    .join('locations', 'events.location_id', 'locations.id')
+    .where('day', day)
+    .select(
+      'events.id',
+      'events.day',
+      'events.time',
+      'events.name as eventName',
+      'events.description',
+      'locations.name as locationName'
+    )
 }
+```
+
+### Prisma
+```js
+// ... init prisma stuff
+const prismaCtx = prisma
 
 // create
 function addNewEvent(
@@ -250,6 +245,18 @@ function deleteEvent(id, ctx = prismaCtx) {
   return await ctx.event.delete({
     where: {
       id,
+    },
+  })
+}
+  
+// relations/joins
+function getEventsByDay(day, ctx = prismaCtx) {
+  return ctx.event.findMany({
+    where: {
+      day,
+    },
+    include: {
+      location: true,
     },
   })
 }
@@ -336,10 +343,27 @@ This structure has no naming collisions because the joined fields are attached a
 Prisma is built for and around TypeScript support. When working in a TS environment, writing and using database functions is rapid just because of the certainty it gives me that I got things right.
 
 - When you write a model in the Prisma schema and run a migration, types are also generated in the Prisma Client.
-
-  These can be imported anywhere in the codebase like:
+  ```prisma
+  // prisma/prisma.schema
+  model Location {
+    id          Int     @id @default(autoincrement())
+    name        String
+    description String
+    events      Event[]
+  }
+  ```
+  generates:
+  ```ts
+  type Location = {
+    id: number;
+    name: string;
+    description: string;
+  }
+  ```
+- These can be imported anywhere in the codebase like:
 
   ```js
+  // anywhere, client or server
   import type { Event, Location } from '@prisma/client'
   ```
 
