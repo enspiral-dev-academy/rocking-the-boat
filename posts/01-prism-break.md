@@ -1,5 +1,12 @@
 # Prism Break - A Brief look at [Prisma](https://www.prisma.io/docs/)
 
+## Episode TLDR;
+
+- Prisma is a ORM with a TypeScript friendly schema generator and query builder
+- Excellent candidate for a TS drop-in for Knex
+- Can run a database viewer on a server (e.g. `http://localhost:5555` to view your database, which can be shared with a liveshare pair!)
+- Joins are easier than Knex
+
 ## What is this?
 
 I really enjoyed Gerard's posts from [`burying-the-lede`](https://github.com/enspiral-dev-academy/burying-the-lede), so I'm writing a spin-off series called `rocking-the-boat`. So far, it's a series where I pick a popular technology and hypothetically hot-swap it with a piece of tech that we currently use, make a shallow comparison, write some thoughts, and share it with y'all. Enjoy, episode 1 is on Prisma and Knex. 🥳
