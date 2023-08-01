@@ -98,7 +98,7 @@ function Input(attributes: Attributes, value: string) {
 
 You can also use the terniray operator to conditionally show and hide stuff just like how it's done it React and I'll leave this as an exercise for you
 
-Check out [dreamfest](https://github.com/dev-academy-challenges/challenges/tree/typed-html/packages/dreamfest-solution) and see full working solution
+Check out [dreamfest](https://github.com/dev-academy-challenges/challenges/tree/typed-html/packages/dreamfest-solution) and see a full working solution
 
 ## Installation & Configuration
 
