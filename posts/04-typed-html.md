@@ -1,4 +1,4 @@
-# Title here
+# About `typed-html`
 
 This post is explores a new way of using `jsx` syntax to do server-side rendering as a replacement to `express-handlebars`.
 
@@ -20,7 +20,7 @@ Server-side rendering is gaining a lot of popularity and it's been adopted by ma
 
 In the bootcamp, we teach this technique by introducing `express-handlebars` to render pages using its templating language and show dynamic content. Handlebars has it's own basic language to handle conditional rendering and iterating over collections and other things.
 Many students shared their learning reflections after the end of the bootcamp and asked why learn handlebars for two weeks then replace it with React. Many of them, unfortunately, missed the point and that is not about learning handlebars but it's about learning Server-side Rendering as technique to build web apps.
-However, I agree with the students to some extent. The DX and the sytanx is old and we can do better than this. We can use `jsx` syntax when doing server-side rendering and re-use the cool features that comes with it for React, which brings me to `typed-html`
+However, I agree with the students to some extent. The DX and the syntax is old and we can do better than this. We can use `jsx` syntax when doing server-side rendering and re-use the cool features that comes with it for React, which brings me to `typed-html`
 
 ## `typed-html`
 
@@ -46,7 +46,7 @@ server.get('/about', (req, res) => {
 ```
 
 Two things to notice here, the first is that the file name has `tsx` as the extension so that we can use `jsx` syntax. The second thing is that this example uses `res.send` to respond with a string. The cool thing about `typed-html` is that jsx returns a string, this is why we're using `res.send`
-No need to configure an engine, middleware, or templates. Eveyting CAN be written in one file, but if you prefer to separate your components, this is how you would do it:
+No need to configure an engine, middleware, or templates. Everything CAN be written in one file, but if you prefer to separate your components, this is how you would do it:
 
 ```js
 // About.tsx
@@ -76,7 +76,7 @@ interface Props {
 function FruitList(props: Props) {
    return (
      <ul>
-         {props.fruits.map(fruit) => <li>{fruit.name (fruit.calories)}</li>)}
+         {props.fruits.map((fruit) => <li>{fruit.name (fruit.calories)}</li>)}
      </ul>
   )
 }
@@ -92,11 +92,11 @@ server.get('/fruits', (req, res) => {
 import * as elements from "typed-html";
 
 function Input(attributes: Attributes, value: string) {
-  return <input  {...attributes} value={value} type="text" class="bg-red-400" />;
+  return <input {...attributes} value={value} type="text" class="bg-red-400" />;
 }
 ```
 
-You can also use the terniray operator to conditionally show and hide stuff just like how it's done it React and I'll leave this as an exercise for you
+You can also use the ternary operator to conditionally show and hide stuff just like how it's done it React and I'll leave this as an exercise for you
 
 Check out [dreamfest](https://github.com/dev-academy-challenges/challenges/tree/typed-html/packages/dreamfest-solution) and see a full working solution
 
@@ -127,7 +127,7 @@ import * as elements from "typed-html";
 
 ## Benefits
 
-- Using `typed-html` should prepare the students to learn and get used to `jsx` sytnax for two weaks before learning React
+- Using `typed-html` should prepare the students to learn and get used to `jsx` syntax for two weeks before learning React
 - Learn why learning `array` methods is useful when dealing with `jsx` components (loops and conditionals)
 - After the students learning React, I expect them to actually see the difference between CSR and SSR
 - `jsx` syntax is easy to work with compared to the build-in helpers that come with handlebars such as, `{{#each art}}{{/each}}`
