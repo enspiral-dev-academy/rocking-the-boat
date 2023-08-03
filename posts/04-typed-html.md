@@ -132,3 +132,20 @@ import * as elements from "typed-html";
 - After the students learning React, I expect them to actually see the difference between CSR and SSR
 - `jsx` syntax is easy to work with compared to the build-in helpers that come with handlebars such as, `{{#each art}}{{/each}}`
 - Thrown errors in handlebars are harder to debug compared to `typed-html`
+
+## Update
+
+Gerard suggested another interesting alternative to `typed-html` and that is to use `react-dom/server`
+
+```diff
+-import * as elements from "typed-html";
++import { renderToMarkup } from "react-dom/server";
+
+server.get('/about', (req, res) => {
+-    res.send(<About title="About Us" />)
++    res.send(renderToMarkup(<About title="About Us" />))
+})
+```
+
+So instead of using `typed-html` to render the jsx, we can use `react-dom/server` to do the same thing. 
+Very cool stuff, thanks Gerard :smile:
